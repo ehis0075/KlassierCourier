@@ -42,8 +42,8 @@ public class Customer implements Serializable {
     @ElementCollection(fetch = FetchType.LAZY)
     private List<Role> roles;
 
-//    @OneToMany(fetch = FetchType.EAGER)
-//    private List<CustomerOrder> listOfOrders;
+    @OneToMany(fetch = FetchType.EAGER)
+    private List<Task> listOfTasks;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn
@@ -54,19 +54,19 @@ public class Customer implements Serializable {
     @CreationTimestamp
     private LocalDate dateCreated;
 
-//    public void addOrder(CustomerOrder order){
-//
-//        if (listOfOrders == null){
-//            this.listOfOrders = new ArrayList<>();
-//        }
-//        this.listOfOrders.add(order);
-//    }
-
     public void addRole(Role userRole){
 
         if (roles == null){
             this.roles = new ArrayList<>();
         }
         this.roles.add(userRole);
+    }
+
+    public void addTask(Task task){
+
+        if (listOfTasks == null){
+            this.listOfTasks = new ArrayList<>();
+        }
+        this.listOfTasks.add(task);
     }
 }
