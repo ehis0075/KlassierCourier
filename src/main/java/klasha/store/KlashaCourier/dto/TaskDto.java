@@ -11,9 +11,24 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class TaskDto {
 
-    private PickUpDto pickUpDetailsDto;
+//    private PickUpDto pickUpDetailsDto;
+//
+//    private DeliveryDto deliveryTaskDto;
+    private String senderFirstName;
 
-    private DeliveryDto deliveryTaskDto;
+    private String senderLastName;
+
+    private String senderPhoneNumber;
+
+    private String senderAddress;
+
+    private String receiverFirstName;
+
+    private String receiverLastName;
+
+    private String receiverPhoneNumber;
+
+    private String receiverAddress;
 
     private String scheduleType;
 }

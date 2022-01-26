@@ -2,6 +2,7 @@ package klasha.store.KlashaCourier.service;
 
 
 
+import klasha.store.KlashaCourier.dto.TaskDto;
 import klasha.store.KlashaCourier.models.*;
 import klasha.store.KlashaCourier.repository.*;
 import klasha.store.KlashaCourier.security.authfacade.AuthenticationFacade;
@@ -84,40 +85,40 @@ public class CustomerServiceImpl implements CustomerService{
     }
 
     @Override
-    public void placeOrder(Task task) {
+    public void placeOrder(TaskDto taskDto) {
 
-        log.info("delivery task request ----->{}"+ task);
+        log.info("delivery task request ----->{}"+ taskDto);
 
         Customer customer = getLoggedInUser();
 
         log.info("logged-in customer ---->"+ customer);
 
         PickUpDetails pickUpDetails = new PickUpDetails();
-        pickUpDetails.setFirstName(task.getPickUpDetails().getFirstName());
-        pickUpDetails.setLastName(task.getPickUpDetails().getLastName());
-        pickUpDetails.setAddress(task.getPickUpDetails().getAddress());
-        pickUpDetails.setPhoneNumber(task.getPickUpDetails().getPhoneNumber());
+        pickUpDetails.setFirstName(taskDto.getSenderFirstName());
+        pickUpDetails.setLastName(taskDto.getSenderLastName());
+        pickUpDetails.setAddress(taskDto.getSenderAddress());
+        pickUpDetails.setPhoneNumber(taskDto.getSenderPhoneNumber());
 
         pickUpDetailsRepository.save(pickUpDetails);
 
         DeliveryDetails deliveryDetails = new DeliveryDetails();
-        deliveryDetails.setFirstName(task.getDeliveryDetails().getFirstName());
-        deliveryDetails.setLastName(task.getDeliveryDetails().getLastName());
-        deliveryDetails.setAddress(task.getDeliveryDetails().getAddress());
-        deliveryDetails.setPhoneNumber(task.getDeliveryDetails().getPhoneNumber());
+        deliveryDetails.setFirstName(taskDto.getReceiverFirstName());
+        deliveryDetails.setLastName(taskDto.getReceiverLastName());
+        deliveryDetails.setAddress(taskDto.getReceiverAddress());
+        deliveryDetails.setPhoneNumber(taskDto.getReceiverPhoneNumber());
 
         deliveryDetailsRepository.save(deliveryDetails);
 
-        Task task1 = new Task();
+        Task task = new Task();
         task.setPickUpDetails(pickUpDetails);
         task.setDeliveryDetails(deliveryDetails);
         task.setScheduleType(ScheduleType.RIGHTAWAY);
 
-        taskRepository.save(task1);
+        taskRepository.save(task);
 
-        log.info("after saving task ----->"+ task1);
+        log.info("after saving task ----->"+ task);
 
-        customer.addTask(task1);
+        customer.addTask(task);
 
         log.info("after mapping task to a customer");
 

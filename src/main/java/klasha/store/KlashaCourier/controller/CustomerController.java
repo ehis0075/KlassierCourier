@@ -2,7 +2,9 @@ package klasha.store.KlashaCourier.controller;
 
 
 
+import com.sun.istack.NotNull;
 import klasha.store.KlashaCourier.dto.DeliveryDto;
+import klasha.store.KlashaCourier.dto.TaskDto;
 import klasha.store.KlashaCourier.models.Customer;
 import klasha.store.KlashaCourier.models.Task;
 import klasha.store.KlashaCourier.service.CustomerService;
@@ -49,10 +51,10 @@ public class CustomerController {
     }
 
     @PostMapping("/place-order")
-    ResponseEntity<?> placeOrder(@RequestBody Task deliveryDto){
+    ResponseEntity<?> placeOrder(@RequestBody @NotNull TaskDto taskDto){
 
         try {
-            customerService.placeOrder(deliveryDto);
+            customerService.placeOrder(taskDto);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
         }
