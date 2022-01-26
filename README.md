@@ -1,0 +1,2 @@
+- when i try to get logged-in user, roles not included
+- remove the role in customer and staff class
