@@ -7,6 +7,7 @@ import klasha.store.KlashaCourier.models.*;
 import klasha.store.KlashaCourier.repository.*;
 import klasha.store.KlashaCourier.security.authfacade.AuthenticationFacade;
 import klasha.store.KlashaCourier.service.exception.CustomerAlreadyExistException;
+import klasha.store.KlashaCourier.utils.ScheduleTypeConverter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -109,10 +110,12 @@ public class CustomerServiceImpl implements CustomerService{
 
         deliveryDetailsRepository.save(deliveryDetails);
 
+        ScheduleType newSchedule = ScheduleTypeConverter.convertStringToEnum(taskDto.getScheduleType()); //issue
+
         Task task = new Task();
         task.setPickUpDetails(pickUpDetails);
         task.setDeliveryDetails(deliveryDetails);
-        task.setScheduleType(ScheduleType.RIGHTAWAY);
+        task.setScheduleType(newSchedule);
 
         taskRepository.save(task);
 
