@@ -35,6 +35,17 @@ public class StaffController {
         return ResponseEntity.ok().body("registration successful");
     }
 
+    @GetMapping("/get-logged-in-staff")
+    public ResponseEntity<Staff> getLoggedInUser(){
+
+        log.info("Get logged in user called");
+        Staff staff = staffService.getLoggedInUser();
+
+        log.info("Object found --> {}", staff);
+        return ResponseEntity.ok().body(staff);
+
+    }
+
 
 
 }

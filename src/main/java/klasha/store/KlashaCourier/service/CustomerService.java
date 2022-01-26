@@ -9,7 +9,7 @@ public interface CustomerService {
 
     void create_account(Customer registrationDto) throws CustomerAlreadyExistException;
 
-//    public Customer getLoggedInUser();
+    public Customer getLoggedInUser();
 
     // create order
 

@@ -71,4 +71,13 @@ public class StaffServiceImpl implements StaffService{
 
     }
 
+    @Override
+    public Staff getLoggedInUser() {
+
+        String name = authenticationFacade.getAuthentication().getName();
+        log.info("Authentication facade --> {}", name);
+
+        return staffRepository.findByEmail(name);
+    }
+
 }

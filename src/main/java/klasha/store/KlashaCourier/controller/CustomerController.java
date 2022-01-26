@@ -36,7 +36,7 @@ public class CustomerController {
         return ResponseEntity.ok().body("registration successful");
     }
 
-    @GetMapping("/auth/login")
+    @GetMapping("/get-logged-in-customer")
     public ResponseEntity<Customer> getLoggedInUser(){
 
         log.info("Get logged in user called");

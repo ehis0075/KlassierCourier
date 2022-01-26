@@ -10,4 +10,6 @@ public interface StaffService {
 
     void create_account(Staff registrationDto) throws StaffAlreadyExistException;
 
+    public Staff getLoggedInUser();
+
 }

@@ -69,14 +69,14 @@ public class CustomerServiceImpl implements CustomerService{
 
     }
 
-//    @Override
-//    public Customer getLoggedInUser() {
-//
-//        String name = authenticationFacade.getAuthentication().getName();
-//        log.info("Authentication facade --> {}", name);
-//
-//        return customerRepository.findByEmail(name);
-//    }
+    @Override
+    public Customer getLoggedInUser() {
+
+        String name = authenticationFacade.getAuthentication().getName();
+        log.info("Authentication facade --> {}", name);
+
+        return customerRepository.findByEmail(name);
+    }
 
 
 }
