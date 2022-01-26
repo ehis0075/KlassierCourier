@@ -2,7 +2,9 @@ package klasha.store.KlashaCourier.controller;
 
 
 
+import klasha.store.KlashaCourier.dto.DeliveryDto;
 import klasha.store.KlashaCourier.models.Customer;
+import klasha.store.KlashaCourier.models.Task;
 import klasha.store.KlashaCourier.service.CustomerService;
 import klasha.store.KlashaCourier.service.exception.CustomerAlreadyExistException;
 import lombok.extern.slf4j.Slf4j;
@@ -44,6 +46,17 @@ public class CustomerController {
 
         log.info("Object found --> {}", customer);
         return ResponseEntity.ok().body(customer);
+    }
+
+    @PostMapping("/place-order")
+    ResponseEntity<?> placeOrder(@RequestBody Task deliveryDto){
+
+        try {
+            customerService.placeOrder(deliveryDto);
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
+        }
+        return ResponseEntity.ok().body("successful order ");
 
     }
 
